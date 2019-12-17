@@ -14,8 +14,6 @@ export default async ({app, store, route}) => {
 
   app.$axios.setToken(token, 'Bearer')
 
-  console.log("WHY IS THIS NOT WORKING?")
-
   return app.$axios.get('/currentUser')
     .then(res => {
       let user = res.data

@@ -1,46 +1,78 @@
 <template>
-  <v-layout>
-    <v-flex xs10 sm8 md6 offset-md3 offset-sm2 offset-xs1>
-      <div class="white elevation-2">
-        <v-toolbar class="cyan" dark>
-          <v-toolbar-title>Registration</v-toolbar-title>
-          <v-spacer />
-          <v-btn v-if="regType == 'login'" @click="regType = 'register'">Register</v-btn>
-          <v-btn v-if="regType == 'register'" @click="regType = 'login'">Login</v-btn>
-        </v-toolbar>
+  <v-layout class="login-background">
+    <div class="left-panel login-panel">
+      <div class="left-panel-inner">
+        <v-img src="/images/pet-vet-logo.jpg" max-width="270" max-height="100" style="margin: 0 auto;" />
+        <br />
 
-        <div class="py-2 px-4">
-          <v-text-field
+        <br/>
+        <br/>
+        <h3 class="display-1">Sign In</h3>
+        
+        <br />
+        <br />
+
+        <v-text-field
             v-model="email"
             label="Email"
             outlined
           />
 
-          <v-text-field
-            v-model="password"
-            label="Password"
-            outlined
-          />
-          <pre>{{error}}</pre>
+        <v-text-field
+          v-model="password"
+          label="Password"
+          outlined
+        />
 
-          <v-btn @click="doTypeReg(regType)">{{regType}}</v-btn>
+        <v-btn color="success" width="100%" large @click="doTypeReg(regType)">{{regType}}</v-btn>
+        <div class="login-options">
+          <p class="caption forgot-pass">Forgot Password?</p>
+          <p v-if="regType == 'login'" @click="regType = 'register'" class="caption to-register">Create an Account</p>
+          <p v-if="regType == 'register'" @click="regType = 'login'" class="caption to-register">Sign into your Account</p> 
+        
         </div>
 
+        <br />
+        <br/>
+        <br/>
 
 
-      </div>
+        <div class="contact-us">
+          <h3 class="subtitle-2" style="text-align: center;">Questions?
+            <br/>
+            Call (818) 346 2455
+            <br />
+            <br/>
+            <br/>
+            Visit us at:
+            <br />
 
-      <div class="card">
-        this is the store state
-        <pre>{{manStore}}</pre>
-      </div>
-    </v-flex>
+            19748 Sherman Way <br />
+            Canoga Park, CA 91306
+          </h3>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="social-media-links">
+          <v-icon>mdi-facebook</v-icon>
+          <v-icon>mdi-twitter</v-icon>
+          <v-icon>mdi-instagram</v-icon>
+        </div>
+
+      </div>  
+    </div>
+    <div class="right-panel login-panel">
+
+    </div>
+
   </v-layout>
 </template>
 
 <script>
   export default {
     name: "login",
+    layout: 'registration-layout',
     data () {
       return {
         email: '',
@@ -75,7 +107,7 @@
         this.$store.dispatch('login', {email: this.email, password: this.password})
           .then(res => {
             console.log('user Logged In')
-            this.$router.push('/dashboard')
+            this.$router.push('/account')
           })
           .catch( err => {
             this.error = err.response.data
@@ -96,5 +128,49 @@
 </script>
 
 <style scoped>
+  .login-background {
+    background-color: #ffffff;
+    display: flex;
+    
+  }
+  .login-panel {
+    height: 100%;
+  }
+  .left-panel {
+    flex: 0 0 425px;
+    height: 100vh;
+  }
+  .right-panel {
+    content: ' ';
+    width: 100%;
+    height: 100vh;
+    background-image: url('/images/dog-boy.jpg');
+    background-size: cover;
+    background-position-x: 25%;
+  }
+
+  .left-panel-inner {
+    padding: 25px;
+    padding-top: 80px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  }
+  .login-options {
+    margin-top: 0.75rem;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+  }
+  .to-register {
+    cursor: pointer;
+    text-align: right;
+  }
+  .social-media-links i {
+    cursor: pointer;
+  }
+  i + i {
+    margin-left: 0.5rem;
+  }
 
 </style>

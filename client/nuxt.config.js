@@ -31,7 +31,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/clientInit.js', ssr: false }
+    { src: '~plugins/clientInit.js', ssr: false },
+    { src: '~plugins/vuetify.js'}
   ],
   /*
   ** Nuxt.js dev-modules

@@ -24,6 +24,7 @@ services:
     client:
         build:
             context: ./client
+        command: yarn dev
         depends_on: 
             - proxy
         ports:

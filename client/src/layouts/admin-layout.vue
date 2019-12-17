@@ -30,36 +30,39 @@
       </v-navigation-drawer>
 
       <v-content>
-        <v-toolbar
-          :clipped-left="clipped"
-          app
+        <v-app-bar
+          clipped-left
         >
           <v-app-bar-nav-icon
             @click="mini = !mini"
           ></v-app-bar-nav-icon>
 
           <v-img
-            src="../images/listicle_og_logo.png"
-            class="grey lighten-2"
+            src="../images/pet-vet-logo.jpg"
+            class="grey lighten-2 vet-logo"
             max-width="150"
-            max-height="100%"></v-img>
+            max-height="100%"
+            @click="$router.push('/')"></v-img>
 
           <v-spacer></v-spacer>
 
-          <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn 
+                v-on="on"
+                icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item style="cursor: pointer;">
+                <v-list-item-title>Log Out</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
 
-          <v-btn icon>
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
 
-          <v-btn icon>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-
-
-        </v-toolbar>
+        </v-app-bar>
 
         <v-container>
           <nuxt />
@@ -86,9 +89,9 @@
             to: '/'
           },
           {
-            icon: 'mdi-chart-bubble',
-            title: 'Inspire',
-            to: '/inspire'
+            icon: 'mdi-calendar-clock',
+            title: 'Calendar',
+            to: '/account/calendar'
           }
         ],
         miniVariant: false,
@@ -101,5 +104,7 @@
 </script>
 
 <style scoped>
-
+  .vet-logo {
+    cursor: pointer;
+  }
 </style>
