@@ -1,131 +1,100 @@
 <template>
-  <div class="about">
-    <div class="title-banner">
-      <h3 class="display-2 text-center">Our Team</h3>
-    </div>
+  <div class="team">
+    <v-layout align-center justify-center column>
+      <v-container>
+        <h3 class="display-1 text-center">
+          Meet Our
+          <br/>
+          Expert Teams
+        </h3>
 
+        <p class="body-2 text-center py-3" style="line-height: 2; max-width: 750px; margin: 0 auto;">
+          Blended value empower communities, we must stand up empathetic circular boots
 
-    <v-layout
-    column
-    align-center>
-      <v-container class="py-10">
-        <div class="about-section mt-10">
-          <div class="about-image-box">
-            <v-img
-              src="../images/Dr-Kirszenbaum.png"
-              aspect-ratio="1"
-              class="about-image"
-              width="100%"
-              max-width="400"
-              max-height="400"
-            ></v-img>
-            <span class="subtitle-1">Lital Kirszenbaum, DVM, MS – Owner</span>
-          </div>
+          <br />
+          on the ground.  Segmentation, targeted concreate academic blended value.
 
-          <div class="about-content-box">
-            <v-layout
-              align-center
-              justify-center
-              column
-            >
-              <h3 class="headline">
-                When I started volunteering at the Los Angeles zoo, I worked with golden lion tamarins. 
-                Then, on the weekends, I began working at a veterinary clinic in North Hollywood. 
-                I remember assisting the veterinarian with all of duties... 
-              </h3>
-            </h3>
-            </v-layout>
-            
-          </div>
+        </p>
+
+        <div class="team-portraits">
+          <template v-for="(member, index) in teams">
+            <team-portrait :key="index" :image="member.image" :caption="member.caption" />
+          </template>
         </div>
-
       </v-container>
 
-
-      <v-container class="py-10">
-        <div class="about-section about-reverse mt-10">
-
-          <div class="about-content-box">
-            <v-layout
-              align-center
-              justify-center
-              column
-            >
-              <h3 class="headline">
-                Dr Pauline Perry graduated from UC Davis, School of Veterinary Medicine in 1992 and attended Loyola Marymount University for her BS in biology.
-              </h3>
-            </h3>
-            </v-layout>
-            
-          </div>
-
-          <div class="about-image-box">
-            <v-img
-              src="../images/Dr.-Perry-Photo-New.jpg"
-              aspect-ratio="1"
-              class="about-image"
-              width="100%"
-              max-width="400"
-              max-height="400"
-            ></v-img>
-            <span class="subtitle-1">Pauline Perry, DVM</span>
-          </div>
-
-        </div>
-
-      </v-container>
-
-
-      <v-container class="py-10">
-        <div class="about-section mt-10">
-          <div class="about-image-box">
-            <v-img
-              src="../images/roger.jpg"
-              aspect-ratio="1"
-              class="about-image"
-              width="100%"
-              max-width="400"
-              max-height="400"
-            ></v-img>
-            <span class="subtitle-1">Roger Koodish, RVT</span>
-          </div>
-
-          <div class="about-content-box">
-            <v-layout
-              align-center
-              justify-center
-              column
-            >
-              <h3 class="headline">
-                Roger has been working at Pet Vet Animal Hospital as a Registered Veterinary Technician since 2005. He has worked in the veterinary field since 1998 at various hospitals in the Los Angeles area. 
-              </h3>
-            </h3>
-            </v-layout>
-            
-          </div>
-        </div>
-
-      </v-container>
-
+      
     </v-layout>
-
   </div>
 </template>
 <script>
+import teamPortrait from './team-portrait'
 export default {
-    
+  components: {
+    teamPortrait
+  },
+  data () {
+    return {
+      teams: [
+        {
+          image: '../images/Dr-Kirszenbaum.png',
+          caption: {
+            name: 'Lital Kirszenbaum',
+            title: 'DVM, MS - Owner',
+            role: 'Owner, Pet Doctor'
+          }
+        },
+        {
+          image: '../images/Dr.-Perry-Photo-New.jpg',
+          caption: {
+            name: 'Pauline Perry',
+            title: 'DVM',
+            role: 'Pet Doctor'
+          }
+        },
+        {
+          image: '../images/roger.jpg',
+          caption: {
+            name: 'Roger Koodish',
+            title: 'RVT',
+            role: 'Technician'
+          }
+        },
+        {
+          image: '../images/shaun-300x300.jpg',
+          caption: {
+            name: 'Shaun Cunningham',
+            title: 'RVT',
+            role: 'Technician'
+          }
+        }
+      ]
+    }
+  }
 }
 </script>
 <style scoped>
 
-.about {
+.team {
   width: 100%;
   height: 100%;
 }
 
 .title-banner {
-  background-color: #5ebcf3;
-  padding: 2rem 0;
+
+}
+
+.team-portraits {
+  display: flex;
+  align-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 5rem 1rem;
+  width: 100%;
+}
+
+.portrait-container {
+  flex: 1 1 25%;
 }
 
 .about-section {
@@ -159,7 +128,13 @@ export default {
   display: flex;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 768px) {
+
+  .portrait-container {
+    flex: 1 1 50%;
+  }
+
+
   .about-section {
     flex-wrap: wrap;
   }

@@ -17,10 +17,6 @@
       </v-container>
     </v-layout>
 
-    <div class="empty-box">
-
-    </div>
-
   </div>
 </template>
 <script>
