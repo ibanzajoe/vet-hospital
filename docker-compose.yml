@@ -19,7 +19,7 @@ services:
       - DIALECT=postgres
       - HOST=0.0.0.0
       - PORT=8080
-      - VIRTUAL_HOST=api.petvet.docker
+      - VIRTUAL_HOST=api-petvet.nobrainerlabs.com
       - VIRTUAL_PORT=8080
     volumes: 
       - ./server:/server
@@ -32,7 +32,7 @@ services:
     ports:
       - "3000"
     environment:
-      - VIRTUAL_HOST=petvet.docker
+      - VIRTUAL_HOST=petvet.nobrainerlabs.com
       - VIRTUAL_PORT=3000
       - HOST=0.0.0.0
     volumes: 

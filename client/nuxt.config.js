@@ -54,7 +54,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    host: 'api.petvet.docker',
+    host: 'api-petvet.nobrainerlabs.com',
     port: 80
   },
 
