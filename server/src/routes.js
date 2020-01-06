@@ -25,7 +25,6 @@ module.exports = (app) => {
     try {
       
       await Patient.findAll().then(function(patients) {
-        console.log('this is the patients: ', patients)
         res.send(patients)
       })
     } catch (err) {

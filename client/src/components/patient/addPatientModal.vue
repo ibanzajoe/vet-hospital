@@ -21,6 +21,11 @@
             <v-text-field v-model="payload.owner_last_name" label="Last Name" outlined hide-details />
           </v-col>
         </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field v-model="payload.phone" label="Phone" outlined hide-details />
+          </v-col>
+        </v-row>
         <v-row dense>
           <v-col>
             <v-text-field v-model="payload.address" label="Address" outlined hide-details />
@@ -119,7 +124,7 @@
 
       <v-row dense>
         <v-btn @click="card_position--" class="primary">Prev</v-btn>
-        <v-btn @click="$emit('createNewPatient', payload)" class="primary">Finish</v-btn>
+        <v-btn @click="submitNewPatientInfo(payload)" class="primary">Finish</v-btn>
       </v-row>
 
       
@@ -160,6 +165,20 @@ export default {
     handleFile(file) {
       console.log('this is the file: ', file)
       this.payload.pet_image = file[0].url
+    },
+    submitNewPatientInfo() {
+      const payload = this.payload
+      console.log('this is payload before sending: ', payload)
+      this.$store.dispatch('createNewPatient', {payload})
+        .then(res => {
+          console.log('this is the return on /createnewPatient: ', res)
+          for (var key in this.payload) {
+            delete this.payload[key]
+          }
+          console.log('this is the payload: ', this.payload)
+          this.card_position = 1
+          this.$emit('closeDialog')
+        })
     }
   }
 }
