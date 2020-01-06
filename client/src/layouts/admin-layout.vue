@@ -92,6 +92,11 @@
             icon: 'mdi-calendar-clock',
             title: 'Calendar',
             to: '/account/calendar'
+          },
+          {
+            icon: 'mdi-apps',
+            title: 'Clients',
+            to: '/admin/clientList'
           }
         ],
         miniVariant: false,

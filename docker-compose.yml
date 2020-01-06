@@ -20,6 +20,9 @@ services:
             - DIALECT=postgres
             - HOST=0.0.0.0
             - PORT=8080
+        volumes: 
+            - ./server:/server
+            - ./.env:/server/.env
     
     client:
         build:
@@ -32,6 +35,9 @@ services:
         environment:
             - VIRTUAL_HOST=client.busadmin.docker
             - HOST=0.0.0.0
+        volumes: 
+            - ./client:/client
+            - ./.env:/client/.env
 
     db:
         image: postgres

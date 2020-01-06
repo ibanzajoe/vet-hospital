@@ -2,10 +2,13 @@ FROM node:10
 
 WORKDIR /client
 EXPOSE 3000
-COPY ./package.json .
+CMD npm run dev
 
-RUN yarn
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+RUN cd /tmp && yarn
 
-COPY . .
+ADD ./ /client
+RUN mv /tmp/node_modules /client
 
-CMD yarn dev
+RUN  npm run build

@@ -32,7 +32,8 @@ module.exports = {
   */
   plugins: [
     { src: '~plugins/clientInit.js', ssr: false },
-    { src: '~plugins/vuetify.js'}
+    { src: '~plugins/vuetify.js'},
+    { src: '~plugins/filestack.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

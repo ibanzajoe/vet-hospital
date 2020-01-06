@@ -3,7 +3,7 @@ import Cookie from 'js-cookie'
 export default function({store, redirect, route, req, res, app}) {
   return new Promise( resolve => {
     const path = route.path
-    const whitelist_paths = ['/', '/admin', '/account', '/account/calendar', '/account/scheduler', '/login', '/login/forgot-pass', '/reset', '/reset-password']
+    const whitelist_paths = ['/', '/admin', '/account', '/account/calendar', '/account/scheduler', '/login', '/login/forgot-pass', '/reset', '/reset-password', '/admin/clientList']
     const path_whitelisted = whitelist_paths.includes(path)
     /*const company = store.state.current_user && store.state.current_user._company*/
     /*const query_params = Object.keys(route.query).map( key => {

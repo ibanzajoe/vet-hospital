@@ -2,10 +2,13 @@ FROM node:10
 
 WORKDIR /server
 EXPOSE 8080
-COPY ./package.json .
+CMD npm run start
 
-RUN yarn
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+RUN cd /tmp && yarn
 
-COPY . .
+ADD ./ /server
+RUN mv /tmp/node_modules /server
 
-CMD yarn start
+
