@@ -54,8 +54,8 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    host: 'localhost',
-    port: 8080
+    host: 'api.petvet.docker',
+    port: 80
   },
 
   router: {

@@ -1,63 +1,51 @@
 version: '3'
 
 services:
-    server:
-        build: 
-            context: ./server
-        command: yarn start
-        links:
-            - db:db
-        ports:
-            - "8080:8080"
-        depends_on: 
-            - db
-            - proxy
-        environment:
-            - DB_HOST=postgres://postgres:pass@db:5432/db
-            - DB_USER=postgres
-            - DB_PASS=pass
-            - DB_NAME=db
-            - DIALECT=postgres
-            - HOST=0.0.0.0
-            - PORT=8080
-        volumes: 
-            - ./server:/server
-            - ./.env:/server/.env
-    
-    client:
-        build:
-            context: ./client
-        command: yarn dev
-        depends_on: 
-            - proxy
-        ports:
-            - "3000:3000"
-        environment:
-            - VIRTUAL_HOST=client.busadmin.docker
-            - HOST=0.0.0.0
-        volumes: 
-            - ./client:/client
-            - ./.env:/client/.env
+  server:
+    build: 
+      context: ./server
+    command: yarn start
+    links:
+      - db:db
+    ports:
+      - "8080"
+    depends_on: 
+      - db
+    environment:
+      - DB_HOST=postgres://postgres:pass@db:5432/db
+      - DB_USER=postgres
+      - DB_PASS=pass
+      - DB_NAME=db
+      - DIALECT=postgres
+      - HOST=0.0.0.0
+      - PORT=8080
+      - VIRTUAL_HOST=api.petvet.docker
+      - VIRTUAL_PORT=8080
+    volumes: 
+      - ./server:/server
+      - ./.env:/server/.env
 
-    db:
-        image: postgres
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=pass
-            - POSTGRES_DB=db
-        depends_on: 
-            - proxy
-        volumes:
-            - ./db/sql:/db/sql
-        ports:
-            - "35432:5432"
+  client:
+    build:
+      context: ./client
+    command: yarn dev
+    ports:
+      - "3000"
+    environment:
+      - VIRTUAL_HOST=petvet.docker
+      - VIRTUAL_PORT=3000
+      - HOST=0.0.0.0
+    volumes: 
+      - ./client:/client
+      - ./.env:/client/.env
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=db
+    volumes:
+      - ./db/sql:/db/sql
+    ports:
+      - "5432"
 
-    proxy:
-        image: jwilder/nginx-proxy:alpine
-        ports:
-            - 80:80
-            - 443:443
-        volumes:
-            - /var/run/docker.sock:/tmp/docker.sock:ro
-            - ./nginx/certs:/etc/nginx/certs:ro
-    
