@@ -24,8 +24,6 @@ services:
     volumes: 
       - ./server:/server
       - ./.env:/server/.env
-    restart: always
-    network: bridge
 
   client:
     build:
@@ -40,8 +38,6 @@ services:
     volumes: 
       - ./client:/client
       - ./.env:/client/.env
-    restart: always
-    network: bridge
   db:
     image: postgres
     environment:
@@ -52,6 +48,4 @@ services:
       - ./db/sql:/db/sql
     ports:
       - "5432"
-    restart: always
-    network: bridge
 
