@@ -35,6 +35,21 @@ module.exports = (app) => {
     }
   })
 
+  app.get('/getPatientById/:id', async (req, res) => {
+    try {
+      console.log('this is the pet id: ', req.params.id)
+      await Patient.findOne({ where: { id: req.params.id }})
+        .then( pet => {
+          res.send(pet)
+        })
+    } catch (err) {
+      console.log('this is the err: ', err)
+      res.status(400).send({
+        error: 'cannot retrieve pet'
+      })
+    }
+  })
+
   app.post('/createNewPatient', async (req,res) => {
     try {
       console.log('does this update changes: ')

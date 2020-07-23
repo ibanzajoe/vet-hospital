@@ -23,6 +23,7 @@
           <patient-card :owner="{owner_name: patient.owner_first_name + ' ' + patient.owner_last_name, phone: patient.phone }"
                         :pet="{pet_name: patient.pet_name, pet_type: patient.pet_type, pet_dob: patient.pet_dob}" 
                         :portrait="patient.pet_image"
+                        @click.native="sendToPatientPage(patient.id)"
                         />
         </v-col>
       </template>
@@ -63,6 +64,10 @@ export default {
         console.log('this is the return on /createNewPatient: ', res.data)
         return res.data
       })
+    },
+
+    sendToPatientPage(id) {
+      this.$router.push(`/admin/patient/${id}`)
     }
   }
   

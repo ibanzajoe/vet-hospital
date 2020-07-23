@@ -3,7 +3,8 @@ import Cookie from 'js-cookie'
 export const state = () => ({
   counter: 0,
   currentUser: null,
-
+  
+  currentPatient: {},
   patientList: [],
   currentPatient: {}
 })
@@ -18,6 +19,10 @@ export const mutations = {
 
   setPatients (state, patients) {
     state.patientList = patients
+  },
+
+  setPatient (state, patient) {
+    state.currentPatient = patient
   }
 }
 
@@ -49,5 +54,13 @@ export const actions = {
         console.log('this is the return on /createNewPatient: ', res.data)
         return res.data
       })
+  },
+  getPatientById ({commit}, id) {
+    return this.$axios.get(`/getPatientById/${id}`)
+     .then( res => {
+       console.log('this is the return on /getPatientById/id: ', res.data)
+       commit('setPatient', res.data)
+       return res.data
+     })
   }
 }
